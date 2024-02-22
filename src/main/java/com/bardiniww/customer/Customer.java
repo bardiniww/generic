@@ -41,6 +41,13 @@ public class Customer {
     public Customer() {
     }
 
+    Customer(final Long id, final String name, final Integer age, final String email) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.email = email;
+    }
+
     public Customer(final String name, final Integer age, final String email) {
         this.name = name;
         this.age = age;
