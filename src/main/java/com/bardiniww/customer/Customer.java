@@ -70,6 +70,10 @@ public class Customer {
         return email;
     }
 
+    void setId(final Long id) {
+        this.id = id;
+    }
+
     void setName(final String name) {
         this.name = name;
     }
