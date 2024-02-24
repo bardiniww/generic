@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class CustomerJDBCDataAccessService implements CustomerDAO {
 
     private static final String SQL_SELECT_BY_ID = "SELECT id, name, age, email FROM customer WHERE id = :id";
+    private static final String SQL_SELECT_ALL = "SELECT id, name, age, email FROM customer";
     private static final String SQL_SELECT_COUNT_BY_ID = "SELECT COUNT(id) FROM customer WHERE id = :id";
     private static final String SQL_SELECT_COUNT_BY_EMAIL = "SELECT COUNT(id) FROM customer WHERE email = :email";
     private static final String SQL_INSERT = "INSERT INTO customer(name, age, email) VALUES (:name, :age, :email)";
@@ -36,6 +38,14 @@ public class CustomerJDBCDataAccessService implements CustomerDAO {
                         rowMapper
                 )
                 .stream().findFirst();
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return jdbcTemplate.query(
+                        SQL_SELECT_ALL,
+                        rowMapper
+                );
     }
 
     @Override

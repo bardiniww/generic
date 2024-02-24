@@ -2,6 +2,8 @@ package com.bardiniww.customer;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
@@ -15,6 +17,11 @@ public class CustomerController {
     @GetMapping("{customerId}")
     public Customer findById(@PathVariable("customerId") Long id) {
         return customerService.findById(id);
+    }
+
+    @GetMapping
+    public List<Customer> findAll() {
+        return customerService.findAll();
     }
 
     @PostMapping

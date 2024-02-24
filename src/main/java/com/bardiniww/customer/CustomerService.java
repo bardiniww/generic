@@ -6,6 +6,8 @@ import com.bardiniww.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -20,6 +22,10 @@ public class CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Customer with passed id [%s] not found".formatted(id)
                 ));
+    }
+
+    public List<Customer> findAll() {
+        return customerDAO.findAll();
     }
 
     public void register(final CustomerRegistrationRequest customer) {
