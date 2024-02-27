@@ -64,6 +64,14 @@
 			<version>1.19.6</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- to use only WebTestClient for integration tests-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
 		<!-- other -->
 		<dependency>
 			<groupId>com.github.javafaker</groupId>

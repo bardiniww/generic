@@ -41,7 +41,7 @@ public class Customer {
     public Customer() {
     }
 
-    Customer(final Long id, final String name, final Integer age, final String email) {
+    public Customer(final Long id, final String name, final Integer age, final String email) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -70,7 +70,7 @@ public class Customer {
         return email;
     }
 
-    void setId(final Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -93,7 +93,6 @@ public class Customer {
 
         final Customer customer = (Customer) o;
 
-        if (!id.equals(customer.id)) return false;
         if (!name.equals(customer.name)) return false;
         if (!age.equals(customer.age)) return false;
         return email.equals(customer.email);
@@ -101,8 +100,7 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
+        int result = name.hashCode();
         result = 31 * result + age.hashCode();
         result = 31 * result + email.hashCode();
         return result;
