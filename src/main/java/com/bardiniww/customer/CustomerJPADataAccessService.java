@@ -26,7 +26,7 @@ public class CustomerJPADataAccessService implements CustomerDAO {
 
     @Override
     public boolean existsByEmail(final String email) {
-        return customerRepository.existsCustomersByEmail(email);
+        return customerRepository.existsByEmail(email);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CustomerJPADataAccessService implements CustomerDAO {
 
     @Override
     public boolean existsById(final Long id) {
-        return customerRepository.existsCustomersById(id);
+        return customerRepository.existsById(id);
     }
 
     @Override

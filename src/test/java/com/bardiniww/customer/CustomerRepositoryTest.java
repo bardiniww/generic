@@ -36,7 +36,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         underTest.save(customer);
 
         // When
-        var actual = underTest.existsCustomersByEmail(email);
+        var actual = underTest.existsByEmail(email);
 
         // Then
         assertThat(actual).isTrue();
@@ -48,7 +48,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
 
         // When
-        var actual = underTest.existsCustomersByEmail(email);
+        var actual = underTest.existsByEmail(email);
 
         // Then
         assertThat(actual).isFalse();
@@ -74,7 +74,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
                 .orElseThrow();
 
         // When
-        var actual = underTest.existsCustomersById(id);
+        var actual = underTest.existsById(id);
 
         // Then
         assertThat(actual).isTrue();
@@ -86,7 +86,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         long id = -1;
 
         // When
-        var actual = underTest.existsCustomersById(id);
+        var actual = underTest.existsById(id);
 
         // Then
         assertThat(actual).isFalse();
