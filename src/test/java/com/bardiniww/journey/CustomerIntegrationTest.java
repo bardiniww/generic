@@ -1,6 +1,5 @@
 package com.bardiniww.journey;
 
-import com.bardiniww.AbstractTestcontainers;
 import com.bardiniww.customer.Customer;
 import com.bardiniww.customer.CustomerRegistrationRequest;
 import com.bardiniww.customer.CustomerUpdateRequest;
@@ -22,7 +21,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class CustomerIntegrationTest extends AbstractTestcontainers {
+public class CustomerIntegrationTest {
 
     @Autowired
     private WebTestClient webTestClient;
