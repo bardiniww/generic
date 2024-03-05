@@ -15,7 +15,7 @@ public class CustomerJDBCDataAccessService implements CustomerDAO {
     private static final String SQL_SELECT_ALL = "SELECT id, name, age, email FROM customer";
     private static final String SQL_SELECT_COUNT_BY_ID = "SELECT COUNT(id) FROM customer WHERE id = :id";
     private static final String SQL_SELECT_COUNT_BY_EMAIL = "SELECT COUNT(id) FROM customer WHERE email = :email";
-    private static final String SQL_INSERT = "INSERT INTO customer(name, age, email) VALUES (:name, :age, :email)";
+    private static final String SQL_INSERT = "INSERT INTO customer1(name, age, email) VALUES (:name, :age, :email)";
     private static final String SQL_DELETE_BY_ID = "DELETE FROM customer WHERE id = :id";
     private static final String SQL_UPDATE_NAME_BY_ID = "UPDATE customer SET name = :name WHERE id = :id";
     private static final String SQL_UPDATE_AGE_BY_ID = "UPDATE customer SET age = :age WHERE id = :id";
