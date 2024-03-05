@@ -1,7 +1,8 @@
 name: CI - Build Backend
 
 on:
-  pull-request:
+  pull_request:
+    types: [ opened, reopened ]
     branches:
       - master
     paths:
