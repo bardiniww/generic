@@ -20,7 +20,7 @@ import java.util.UUID;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-//todo не работают без поднятой бд, проверить - работают ли тесты в ci/cd
+//локально не прогоняются без поднятой бд, только при пулл-реквесте
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class CustomerIT {
 
