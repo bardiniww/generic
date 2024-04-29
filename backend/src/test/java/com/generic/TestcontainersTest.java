@@ -1,4 +1,4 @@
-package com.bardiniww;
+package com.generic;
 
 import org.junit.jupiter.api.Test;
 import org.testcontainers.junit.jupiter.Testcontainers;

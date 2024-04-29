@@ -1,8 +1,8 @@
-package com.bardiniww.customer;
+package com.generic.customer;
 
-import com.bardiniww.exception.DuplicateResourceException;
-import com.bardiniww.exception.RequestValidationException;
-import com.bardiniww.exception.ResourceNotFoundException;
+import com.generic.exception.DuplicateResourceException;
+import com.generic.exception.RequestValidationException;
+import com.generic.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -88,10 +88,10 @@ class CustomerServiceTest {
         verify(customerDAO).save(customerArgumentCaptor.capture());
 
         final Customer actual = customerArgumentCaptor.getValue();
-        assertThat(actual.getId()).isNull();
-        assertThat(actual.getName()).isEqualTo(customerRegistrationRequest.name());
-        assertThat(actual.getEmail()).isEqualTo(customerRegistrationRequest.email());
-        assertThat(actual.getAge()).isEqualTo(customerRegistrationRequest.age());
+        assertThat(actual.id()).isNull();
+        assertThat(actual.name()).isEqualTo(customerRegistrationRequest.name());
+        assertThat(actual.email()).isEqualTo(customerRegistrationRequest.email());
+        assertThat(actual.age()).isEqualTo(customerRegistrationRequest.age());
     }
 
     @Test
@@ -194,9 +194,9 @@ class CustomerServiceTest {
         verify(customerDAO).update(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getName()).isEqualTo(updateRequest.name());
-        assertThat(capturedCustomer.getEmail()).isEqualTo(updateRequest.email());
-        assertThat(capturedCustomer.getAge()).isEqualTo(updateRequest.age());
+        assertThat(capturedCustomer.name()).isEqualTo(updateRequest.name());
+        assertThat(capturedCustomer.email()).isEqualTo(updateRequest.email());
+        assertThat(capturedCustomer.age()).isEqualTo(updateRequest.age());
     }
 
     @Test
@@ -221,9 +221,9 @@ class CustomerServiceTest {
         verify(customerDAO).update(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getName()).isEqualTo(updateRequest.name());
-        assertThat(capturedCustomer.getAge()).isEqualTo(customer.getAge());
-        assertThat(capturedCustomer.getEmail()).isEqualTo(customer.getEmail());
+        assertThat(capturedCustomer.name()).isEqualTo(updateRequest.name());
+        assertThat(capturedCustomer.age()).isEqualTo(customer.age());
+        assertThat(capturedCustomer.email()).isEqualTo(customer.email());
     }
 
     @Test
@@ -252,9 +252,9 @@ class CustomerServiceTest {
         verify(customerDAO).update(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getName()).isEqualTo(customer.getName());
-        assertThat(capturedCustomer.getAge()).isEqualTo(customer.getAge());
-        assertThat(capturedCustomer.getEmail()).isEqualTo(newEmail);
+        assertThat(capturedCustomer.name()).isEqualTo(customer.name());
+        assertThat(capturedCustomer.age()).isEqualTo(customer.age());
+        assertThat(capturedCustomer.email()).isEqualTo(newEmail);
     }
 
     @Test
@@ -279,9 +279,9 @@ class CustomerServiceTest {
         verify(customerDAO).update(customerArgumentCaptor.capture());
         Customer capturedCustomer = customerArgumentCaptor.getValue();
 
-        assertThat(capturedCustomer.getName()).isEqualTo(customer.getName());
-        assertThat(capturedCustomer.getAge()).isEqualTo(updateRequest.age());
-        assertThat(capturedCustomer.getEmail()).isEqualTo(customer.getEmail());
+        assertThat(capturedCustomer.name()).isEqualTo(customer.name());
+        assertThat(capturedCustomer.age()).isEqualTo(updateRequest.age());
+        assertThat(capturedCustomer.email()).isEqualTo(customer.email());
     }
 
     @Test
@@ -319,7 +319,7 @@ class CustomerServiceTest {
         when(customerDAO.findById(id)).thenReturn(Optional.of(customer));
 
         CustomerUpdateRequest updateRequest = new CustomerUpdateRequest(
-                customer.getName(), customer.getAge(), customer.getEmail());
+                customer.name(), customer.age(), customer.email());
 
         // When
         assertThatThrownBy(() -> underTest.update(id, updateRequest))

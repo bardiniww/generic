@@ -1,23 +1,24 @@
-package com.bardiniww.customer;
+package com.generic.customer;
 
-import com.bardiniww.exception.DuplicateResourceException;
-import com.bardiniww.exception.RequestValidationException;
-import com.bardiniww.exception.ResourceNotFoundException;
+import com.generic.exception.DuplicateResourceException;
+import com.generic.exception.RequestValidationException;
+import com.generic.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomerService {
 
     private final CustomerDAO customerDAO;
 
-    public CustomerService(@Qualifier("jdbc") CustomerDAO customerDAO) {
+    public CustomerService(final CustomerDAO customerDAO) {
         this.customerDAO = customerDAO;
     }
 
-    public Customer findById(long id) {
+    public Customer findById(final long id) {
         return customerDAO.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Customer with passed id [%s] not found".formatted(id)
@@ -48,11 +49,11 @@ public class CustomerService {
         customerDAO.deleteById(id);
     }
 
-    public boolean existsByEmail(String email) {
+    public boolean existsByEmail(final String email) {
         return customerDAO.existsByEmail(email);
     }
 
-    public boolean existsById(Long id) {
+    public boolean existsById(final Long id) {
         return customerDAO.existsById(id);
     }
 
@@ -61,21 +62,25 @@ public class CustomerService {
 
         boolean changes = false;
 
-        if (updateRequest.name() != null && !updateRequest.name().equals(customer.getName())) {
-            customer.setName(updateRequest.name());
+        String newName = null;
+        String newEmail = null;
+        Integer newAge = null;
+
+        if (updateRequest.name() != null && !updateRequest.name().equals(customer.name())) {
+            newName = updateRequest.name();
             changes = true;
         }
 
-        if (updateRequest.age() != null && !updateRequest.age().equals(customer.getAge())) {
-            customer.setAge(updateRequest.age());
+        if (updateRequest.age() != null && !updateRequest.age().equals(customer.age())) {
+            newAge = updateRequest.age();
             changes = true;
         }
 
-        if (updateRequest.email() != null && !updateRequest.email().equals(customer.getEmail())) {
+        if (updateRequest.email() != null && !updateRequest.email().equals(customer.email())) {
             if (customerDAO.existsByEmail(updateRequest.email())) {
                 throw new DuplicateResourceException("Email already taken");
             }
-            customer.setEmail(updateRequest.email());
+            newEmail = updateRequest.email();
             changes = true;
         }
 
@@ -83,6 +88,13 @@ public class CustomerService {
             throw new RequestValidationException("No data changes found");
         }
 
-        customerDAO.update(customer);
+        Customer updated = new Customer(
+                customer.id(),
+                Objects.nonNull(newName) ? newName : customer.name(),
+                Objects.nonNull(newAge) ? newAge : customer.age(),
+                Objects.nonNull(newEmail) ? newEmail : customer.email()
+        );
+
+        customerDAO.update(updated);
     }
 }

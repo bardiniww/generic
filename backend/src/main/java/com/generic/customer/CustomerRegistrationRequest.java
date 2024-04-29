@@ -1,4 +1,4 @@
-package com.bardiniww.customer;
+package com.generic.customer;
 
 public record CustomerRegistrationRequest(
         String name,

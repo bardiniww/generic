@@ -1,4 +1,4 @@
-package com.bardiniww.customer;
+package com.generic.customer;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;

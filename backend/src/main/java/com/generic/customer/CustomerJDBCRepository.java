@@ -1,4 +1,4 @@
-package com.bardiniww.customer;
+package com.generic.customer;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Repository("jdbc")
-public class CustomerJDBCDataAccessService implements CustomerDAO {
+@Repository
+public class CustomerJDBCRepository implements CustomerDAO {
 
     private static final String SQL_SELECT_BY_ID = "SELECT id, name, age, email FROM customer WHERE id = :id";
     private static final String SQL_SELECT_ALL = "SELECT id, name, age, email FROM customer";
@@ -24,7 +24,7 @@ public class CustomerJDBCDataAccessService implements CustomerDAO {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final CustomerRowMapper rowMapper;
 
-    public CustomerJDBCDataAccessService(final NamedParameterJdbcTemplate jdbcTemplate, final CustomerRowMapper rowMapper) {
+    public CustomerJDBCRepository(final NamedParameterJdbcTemplate jdbcTemplate, final CustomerRowMapper rowMapper) {
         this.jdbcTemplate = jdbcTemplate;
         this.rowMapper = rowMapper;
     }
@@ -64,9 +64,9 @@ public class CustomerJDBCDataAccessService implements CustomerDAO {
         jdbcTemplate.update(
                 SQL_INSERT,
                 new MapSqlParameterSource()
-                        .addValue("name", customer.getName())
-                        .addValue("age", customer.getAge())
-                        .addValue("email", customer.getEmail())
+                        .addValue("name", customer.name())
+                        .addValue("age", customer.age())
+                        .addValue("email", customer.email())
         );
     }
 
@@ -92,28 +92,28 @@ public class CustomerJDBCDataAccessService implements CustomerDAO {
 
     @Override
     public void update(final Customer customer) {
-        if (Objects.nonNull(customer.getName())) {
+        if (Objects.nonNull(customer.name())) {
             jdbcTemplate.update(
                     SQL_UPDATE_NAME_BY_ID,
                     new MapSqlParameterSource()
-                            .addValue("name", customer.getName())
-                            .addValue("id", customer.getId())
+                            .addValue("name", customer.name())
+                            .addValue("id", customer.id())
             );
         }
-        if (Objects.nonNull(customer.getAge())) {
+        if (Objects.nonNull(customer.age())) {
             jdbcTemplate.update(
                     SQL_UPDATE_AGE_BY_ID,
                     new MapSqlParameterSource()
-                            .addValue("age", customer.getAge())
-                            .addValue("id", customer.getId())
+                            .addValue("age", customer.age())
+                            .addValue("id", customer.id())
             );
         }
-        if (Objects.nonNull(customer.getEmail())) {
+        if (Objects.nonNull(customer.email())) {
             jdbcTemplate.update(
                     SQL_UPDATE_EMAIL_BY_ID,
                     new MapSqlParameterSource()
-                            .addValue("email", customer.getEmail())
-                            .addValue("id", customer.getId())
+                            .addValue("email", customer.email())
+                            .addValue("id", customer.id())
             );
         }
     }

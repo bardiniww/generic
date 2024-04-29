@@ -1,4 +1,4 @@
-package com.bardiniww.customer;
+package com.generic.customer;
 
 import java.util.List;
 import java.util.Optional;

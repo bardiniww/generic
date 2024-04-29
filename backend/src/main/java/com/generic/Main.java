@@ -1,7 +1,7 @@
-package com.bardiniww;
+package com.generic;
 
-import com.bardiniww.customer.Customer;
-import com.bardiniww.customer.CustomerRepository;
+import com.generic.customer.Customer;
+import com.generic.customer.CustomerJDBCRepository;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;
@@ -19,8 +19,9 @@ public class Main {
 
     }
 
+// use this to debug
     @Bean
-    CommandLineRunner runner(CustomerRepository repository) {
+    CommandLineRunner runner(CustomerJDBCRepository repository) {
         return args -> {
             var faker = new Faker();
             final Random random = new Random();

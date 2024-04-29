@@ -1,4 +1,4 @@
-package com.bardiniww;
+package com.generic;
 
 import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;
@@ -21,7 +21,7 @@ public abstract class AbstractTestcontainers {
      *
      * docker ps - to check container name and past it then
      * docker exec -it actualcontainername bash - to join inside container bash
-     * psql -U bardiniww -d bardiniww-dao-unit test - to connect psql
+     * psql -U bardiniww -d bardiniww-dao-unit-test - to connect psql
      * \c bardiniww-dao-unit-test - connect to the database
      * \dt - describe tables
      */

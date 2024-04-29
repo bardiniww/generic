@@ -1,8 +1,8 @@
-package com.bardiniww.journey;
+package com.generic.journey;
 
-import com.bardiniww.customer.Customer;
-import com.bardiniww.customer.CustomerRegistrationRequest;
-import com.bardiniww.customer.CustomerUpdateRequest;
+import com.generic.customer.Customer;
+import com.generic.customer.CustomerRegistrationRequest;
+import com.generic.customer.CustomerUpdateRequest;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.junit.jupiter.api.Test;
@@ -20,6 +20,7 @@ import java.util.UUID;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+//todo не работают без поднятой бд, проверить - работают ли тесты в ci/cd
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class CustomerIT {
 
@@ -64,22 +65,20 @@ public class CustomerIT {
                 .returnResult()
                 .getResponseBody();
 
+        long id = allCustomers.stream()
+                .filter(customer -> customer.email().equals(email))
+                .map(Customer::id)
+                .findFirst()
+                .orElseThrow();
+
         // make sure that customer is present
         Customer expectedCustomer = new Customer(
-                name, age, email
+                id, name, age, email
         );
 
         assertThat(allCustomers)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expectedCustomer);
-
-        long id = allCustomers.stream()
-                .filter(customer -> customer.getEmail().equals(email))
-                .map(Customer::getId)
-                .findFirst()
-                .orElseThrow();
-
-        expectedCustomer.setId(id);
 
         // get customer by id
         webTestClient.get()
@@ -131,8 +130,8 @@ public class CustomerIT {
 
 
         long id = allCustomers.stream()
-                .filter(customer -> customer.getEmail().equals(email))
-                .map(Customer::getId)
+                .filter(customer -> customer.email().equals(email))
+                .map(Customer::id)
                 .findFirst()
                 .orElseThrow();
 
@@ -192,8 +191,8 @@ public class CustomerIT {
 
 
         long id = allCustomers.stream()
-                .filter(customer -> customer.getEmail().equals(email))
-                .map(Customer::getId)
+                .filter(customer -> customer.email().equals(email))
+                .map(Customer::id)
                 .findFirst()
                 .orElseThrow();
 
