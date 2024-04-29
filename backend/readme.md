@@ -8,4 +8,4 @@
      * \c customer - connect to the database
 3. Дальше можно стратовать саму аппку через класс Main.class
 
-PS. Не забудь проставить в idea-project structure - sdk и прочюю шляпу + инициализировать проект мавен
+PS. Не забудь проставить в idea-project structure - sdk и прочюю шляпу + инициализировать проект мавен.
